@@ -31,8 +31,8 @@ export default function App() {
   return (
     <View style={styles.container}>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-        <AddObjectif inputValue={inputValue} setInputValue={setInputValue} setObjectifs={setObjectifs}/>
-        <ListObjectifs objectifs={objectifs} handleRemoveObjectif={handleRemoveObjectif}/>
+          <AddObjectif inputValue={inputValue} setInputValue={setInputValue} setObjectifs={setObjectifs}/>
+          <ListObjectifs objectifs={objectifs} handleRemoveObjectif={handleRemoveObjectif}/>
       </ImageBackground>
       
     </View>
