@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Pressable, StyleSheet, Text, View, TextInput, ImageComponent } from 'react-native';
-import AddObjectif from './AddObjectif-component';
+import AddObjectif from './components/AddObjectif-component';
+import ListObjectifs from './components/List-component';
 
 export default function App() {
   const [inputValue, setInputValue] = useState('');
@@ -43,7 +44,7 @@ export default function App() {
 
       <AddObjectif inputValue={inputValue} setInputValue={setInputValue} setObjectifs={setObjectifs}/>
 
-      <View style={styles.container}>
+      {/* <View style={styles.container}>
         {objectifs.map((objectif, index) => (
           <View key={index} style={styles.objectifContainer}>
             <Text style={styles.textstyle}>{objectif}</Text>
@@ -53,7 +54,9 @@ export default function App() {
           </View>
         ))}
         <StatusBar style="auto" />
-      </View>
+      </View> */}
+
+      <ListObjectifs objectifs={objectifs} handleRemoveObjectif={handleRemoveObjectif}/>
     </View>
   );
 }
