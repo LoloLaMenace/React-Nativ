@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Pressable, StyleSheet, Text, View, TextInput } from 'react-native';
+import { Pressable, StyleSheet, Text, View, TextInput, ImageComponent } from 'react-native';
+import AddObjectif from './AddObjectif-component';
 
 export default function App() {
   const [inputValue, setInputValue] = useState('');
@@ -27,7 +28,8 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.container2}>
+      
+      {/* <View style={styles.container2}>
         <TextInput
           style={styles.input}
           placeholder="Enter vos objectifs"
@@ -37,7 +39,9 @@ export default function App() {
         <Pressable style={styles.button} onPress={handleAddObjectif}>
           <Text style={styles.Wtext}>AJOUTER</Text>
         </Pressable>
-      </View>
+      </View> */}
+
+      <AddObjectif inputValue={inputValue} setInputValue={setInputValue} setObjectifs={setObjectifs}/>
 
       <View style={styles.container}>
         {objectifs.map((objectif, index) => (
