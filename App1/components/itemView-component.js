@@ -7,7 +7,7 @@ const ItemObjectif = ({objectif, index, handleRemoveObjectif}) => {
         <View key={index} style={styles.objectifContainer}>
             <Text style={styles.textstyle}>{objectif}</Text>
             <Pressable onPress={() => handleRemoveObjectif(index)}>
-                <Text style={[styles.deleteButton, styles.textstyle]}>X</Text>
+                <Text style={styles.deleteButton}>X</Text>
             </Pressable>
         </View>
     )
@@ -28,11 +28,17 @@ const styles = StyleSheet.create({
       },
       textstyle: {
         fontSize: 20,
-        marginBottom: 10
+        marginBottom: 10,
+        color: 'white',
+        textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
       },
       deleteButton: {
+        fontSize: 20,
         color: 'red',
         marginLeft: 10,
+        marginBottom: 10,
       },
 });
 

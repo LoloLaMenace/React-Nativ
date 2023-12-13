@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Pressable, StyleSheet, Text, View, TextInput } from 'react-native';
+import { Pressable, StyleSheet, Text, View, TextInput, TouchableWithoutFeedback } from 'react-native';
 
 const AddObjectif = ({ inputValue, setInputValue, setObjectifs }) => {
     const handleAddObjectif = () => {
@@ -22,8 +22,8 @@ const AddObjectif = ({ inputValue, setInputValue, setObjectifs }) => {
 const styles = StyleSheet.create({
     container2: {
       width: '100%',
-      backgroundColor: '#fff',
       alignItems: 'center',
+      marginTop: 100,
       marginBottom: 100,
     },
     input: {
@@ -31,9 +31,10 @@ const styles = StyleSheet.create({
       width: '90%',
       marginBottom: 10,
       borderWidth: 1,
-      borderColor: 'grey',
+      borderColor: 'white',
       borderRadius: 150,
       padding: 10,
+      backgroundColor: 'white'
     },
     button: {
       paddingVertical: 12,
