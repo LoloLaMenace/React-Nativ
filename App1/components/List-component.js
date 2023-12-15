@@ -9,17 +9,18 @@ const ListObjectifs = ({ objectifs, handleRemoveObjectif }) => {
           renderItem={({ item, index }) => (
             <ItemObjectif objectif={item} index={index} handleRemoveObjectif={handleRemoveObjectif} />
           )}
-          keyExtractor={(item, index) => index.toString()} style={styles.container}
+          keyExtractor={(item, index) => index.toString()} style={styles.containerList}
         />
     ); 
 };
 
 const styles = StyleSheet.create({
-    container: {
+    containerList: {
         flex: 1,
         marginLeft: 'auto',
         marginRight: 'auto',
-        marginBottom: 150
+        marginTop: 100,
+        marginBottom: 150,
       },
 });
 

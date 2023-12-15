@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
       width: '100%',
       alignItems: 'center',
       marginTop: 100,
-      marginBottom: 100,
+      marginBottom: 10,
     },
     input: {
       height: 50,
