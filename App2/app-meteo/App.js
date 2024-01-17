@@ -84,7 +84,7 @@ export default function App() {
     return (
       <ImageBackground source={require('./assets/back.jpg')} style={styles.container}>
         <CityLocation
-          city={city}
+          city={weatherData.name}
           temperature={temperature}
           weatherDescription={weatherDescription}
           tempMax={tempMax}
@@ -92,7 +92,7 @@ export default function App() {
         />
 
         <View style={styles.container1}>
-          <Text style={styles.textPrevi}>{`🕒 PREVISION DES 24H DERNIERE HEURE`}</Text>
+          <Text style={styles.textPrevi}>{`🕒 PREVISION DES 24H DERNIERE HEURE`}{weatherData.main.temp}</Text>
 
           {/* FlatList pour le défilement horizontal */}
           <FlatList
