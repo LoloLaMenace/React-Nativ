@@ -14,10 +14,6 @@ const CityLocation =({city, temperature, weatherDescription, tempMax, tempMin}) 
         </View>
         <View style={styles.weatherInfoContainer}>
           <Text style={styles.temperatureText}>{`${temperature}°`}</Text>
-          {/* <Image
-            source={{ uri: `https://openweathermap.org/img/w/${weatherIcon}.png` }}
-            style={styles.weatherIcon}
-          /> */}
         </View>
         <View style={styles.cityContainer}>
           <Text style={styles.cityText}>{weatherDescription}</Text>
@@ -37,16 +33,9 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         marginRight: 10,
       },
-      text: {
-        color: 'white',
-      },
       temperatureText: {
         color: 'white',
         fontSize: 40,
-      },
-      weatherIcon: {
-        width: 50,
-        height: 50,
       },
       locationContainer: {
         marginVertical: 10,

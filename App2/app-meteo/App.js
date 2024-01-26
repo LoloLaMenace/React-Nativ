@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, ImageBackground, ActivityIndicator, Image } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, ActivityIndicator, Image, ScrollView } from 'react-native';
 import * as Location from 'expo-location';
 import { format } from 'date-fns';
 import CityLocation from './Components/CityLocationComponent';
 import { FlatList } from 'react-native';
+import ForecastDay from './Components/ForecatDay';
 
 export default function App() {
   const [location, setLocation] = useState(null);
@@ -16,7 +17,7 @@ export default function App() {
     const fetchData = async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
+        setErrorMsg('La permission d\'accéder à la localisation a été refusée');
         setLoading(false);
         return;
       }
@@ -31,7 +32,7 @@ export default function App() {
         const data = await response.json();
         setWeatherData(data);
       } catch (error) {
-        console.error('Error fetching current weather data:', error);
+        console.error('Erreur lors de la récupération des données météorologiques actuelles :', error);
       }
 
       try {
@@ -43,12 +44,11 @@ export default function App() {
         const response2 = await fetch(apiUrl2);
         const data2 = await response2.json();
 
-        // Afficher les 8 premiers éléments
-        const first8Forecast = data2.list.slice(0, 8);
-        setDataDays(first8Forecast);
+        const groupedData = groupForecastDataByDay(data2.list);
+        setDataDays(groupedData);
       } catch (error) {
-        console.error('Error fetching weather forecast data:', error);} 
-      finally {
+        console.error('Erreur lors de la récupération des prévisions météorologiques :', error);
+      } finally {
         setLoading(false);
       }
     };
@@ -90,31 +90,32 @@ export default function App() {
           tempMax={tempMax}
           tempMin={tempMin}
         />
-
-        <View style={styles.container1}>
-          <Text style={styles.textPrevi}>{`🕒 PREVISION DES 24H DERNIERE HEURE`}</Text>
-
-          <FlatList
-            data={dataDays}
-            horizontal
-            keyExtractor={(item) => item.dt.toString()}
-            renderItem={({ item }) => (
-              <View style={styles.forecastItem}>
-                <Text style={styles.forecastTime}>{format(new Date(item.dt * 1000), 'HH:mm')}</Text>
-                <Image source={{ uri: `https://openweathermap.org/img/w/${item.weather[0].icon}.png` }} style={styles.weatherIcon} />
-                <Text style={styles.forecastTemperature}>{`${Math.round(item.main.temp)}°C`}</Text>
-              </View>
-            )}
-          />
+        <View style={styles.container2}>
+          <Text style={styles.textPrevi}>{`🕒 PRÉVISION DES 5 DERNIÈRE JOUR`}</Text>
         </View>
-        <View style={styles.container1}>
-          <Text style={styles.textPrevi}>{`🗓 PREVISION SUR 5 JOURS`}</Text>
+        <ScrollView >
           
-        </View>
+
+          {Object.entries(dataDays).map(([day, dayData]) => (
+            <ForecastDay day={day} dayData={dayData}/>
+          ))}
+        </ScrollView>
       </ImageBackground>
     );
   }
 }
+
+const groupForecastDataByDay = (forecastData) => {
+  const groupedData = {};
+  forecastData.forEach((item) => {
+    const date = format(new Date(item.dt * 1000), 'yyyy-MM-dd');
+    if (!groupedData[date]) {
+      groupedData[date] = [];
+    }
+    groupedData[date].push(item);
+  });
+  return groupedData;
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -128,33 +129,17 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   textPrevi: {
-    marginTop: 5,
+    marginTop: 50,
     marginLeft: 5,
-    marginBottom: 5,
+    marginBottom: 50,
     color: 'rgba(250, 250, 255, 0.5)',
   },
   loadingContainer: {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  forecastItem: {
-    margin: 7,
-    padding: 7,
-    alignItems: 'center',
-  },
-  forecastTime: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 5,
-    color: 'white',
-  },
-  weatherIcon: {
-    width: 50,
-    height: 50,
-    marginBottom: 5,
-  },
-  forecastTemperature: {
-    fontSize: 16,
-    color: 'white',
+  container2:{
+    display: 'flex',
+    alignItems: 'center'
   },
 });
