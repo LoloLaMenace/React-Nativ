@@ -58,17 +58,15 @@ export default function App() {
 
   if (loading) {
     return (
-      <ImageBackground source={require('./assets/back.jpg')} style={styles.container}>
         <View style={[styles.container, styles.loadingContainer]}>
-          <ActivityIndicator size="large" color="white" />
+          <ActivityIndicator size="large" color="black" />
         </View>
-      </ImageBackground>
     );
   }
 
   if (errorMsg) {
     return (
-      <ImageBackground source={require('./assets/back.jpg')} style={styles.container}>
+      <ImageBackground source={require('./assets/default_background.jpg')} style={styles.container}>
         <View style={styles.container1}>
           <Text style={styles.textPrevi}>{errorMsg}</Text>
         </View>
@@ -80,15 +78,17 @@ export default function App() {
     const city = weatherData.name;
     const tempMax = Math.round(weatherData.main.temp_max);
     const tempMin = Math.round(weatherData.main.temp_min);
-
+    const weatherIcon = weatherData.weather[0].icon;
+    const backgroundImage = getBackgroundImageByIcon(weatherIcon);
     return (
-      <ImageBackground source={require('./assets/back.jpg')} style={styles.container}>
+      <ImageBackground source={backgroundImage} style={styles.container}>
         <CityLocation
           city={city}
           temperature={temperature}
           weatherDescription={weatherDescription}
           tempMax={tempMax}
           tempMin={tempMin}
+          weatherIcon={weatherIcon}
         />
         <View style={styles.container2}>
           <Text style={styles.textPrevi}>{`🕒 PRÉVISION DES 5 DERNIÈRE JOUR`}</Text>
@@ -104,6 +104,50 @@ export default function App() {
     );
   }
 }
+
+const getBackgroundImageByIcon = (weatherIcon) => {
+  switch (weatherIcon) {
+    case '01d':
+      return require('./assets/clear_sky_day.jpg');
+    case '01n':
+      return require('./assets/clear_sky_night.jpg');
+    case '02d':
+      return require('./assets/few_clouds_day.jpg');
+    case '02n':
+      return require('./assets/few_clouds_night.jpg');
+    case '03d':
+      return require('./assets/scattered_clouds_day.jpg');
+    case '03n':
+      return require('./assets/scattered_clouds_night.jpg');
+    case '04d':
+      return require('./assets/broken_clouds_day.jpg');
+    case '04n':
+      return require('./assets/broken_clouds_night.jpg');
+    case '09d':
+      return require('./assets/showers_day.jpg');
+    case '09n':
+      return require('./assets/showers_night.jpg');
+    case '10d':
+      return require('./assets/showers_day.jpg');
+    case '10n':
+      return require('./assets/showers_night.jpg');
+    case '11d':
+      return require('./assets/thunderstorm_day.jpg');
+    case '11n':
+      return require('./assets/thunderstorm_night.jpg');
+    case '13d':
+      return require('./assets/snow_day.jpg');
+    case '13n':
+      return require('./assets/snow_night.jpg');
+    case '50d':
+      return require('./assets/mist_day.jpg');
+    case '50n':
+      return require('./assets/mist_night.jpg');
+    default:
+      return require('./assets/clear_sky_day.jpg');
+  }
+};
+
 
 const groupForecastDataByDay = (forecastData) => {
   const groupedData = {};

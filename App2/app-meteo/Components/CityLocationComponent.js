@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text, View, StyleSheet} from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, ActivityIndicator, Image, ScrollView } from 'react-native';
 
-const CityLocation =({city, temperature, weatherDescription, tempMax, tempMin}) => {
+const CityLocation =({city, temperature, weatherDescription, tempMax, tempMin, weatherIcon}) => {
     return (
         <View style={styles.container1}>
         <View style={styles.locationContainer}>
@@ -14,6 +14,10 @@ const CityLocation =({city, temperature, weatherDescription, tempMax, tempMin}) 
         </View>
         <View style={styles.weatherInfoContainer}>
           <Text style={styles.temperatureText}>{`${temperature}°`}</Text>
+          <Image
+            source={{ uri: `https://openweathermap.org/img/w/${weatherIcon}.png` }}
+            style={styles.weatherIcon}
+          />
         </View>
         <View style={styles.cityContainer}>
           <Text style={styles.cityText}>{weatherDescription}</Text>
@@ -65,6 +69,11 @@ const styles = StyleSheet.create({
       tempMinMaxText: {
         color: 'white',
         fontSize: 16,
+      },
+      weatherIcon: {
+        width: 50,
+        height: 50,
+        marginBottom: 5,
       },
 });
 
