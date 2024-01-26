@@ -91,7 +91,7 @@ export default function App() {
           weatherIcon={weatherIcon}
         />
         <View style={styles.container2}>
-          <Text style={styles.textPrevi}>{`🕒 PRÉVISION DES 5 DERNIÈRE JOUR`}</Text>
+          <Text style={styles.textPrevi}>{`🕒 PRÉVISION DES 5 PROCHAINS JOUR`}</Text>
         </View>
         <ScrollView >
           
