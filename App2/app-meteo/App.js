@@ -47,8 +47,8 @@ export default function App() {
         const first8Forecast = data2.list.slice(0, 8);
         setDataDays(first8Forecast);
       } catch (error) {
-        console.error('Error fetching weather forecast data:', error);
-      } finally {
+        console.error('Error fetching weather forecast data:', error);} 
+      finally {
         setLoading(false);
       }
     };
@@ -84,7 +84,7 @@ export default function App() {
     return (
       <ImageBackground source={require('./assets/back.jpg')} style={styles.container}>
         <CityLocation
-          city={weatherData.name}
+          city={city}
           temperature={temperature}
           weatherDescription={weatherDescription}
           tempMax={tempMax}
@@ -92,9 +92,8 @@ export default function App() {
         />
 
         <View style={styles.container1}>
-          <Text style={styles.textPrevi}>{`🕒 PREVISION DES 24H DERNIERE HEURE`}{weatherData.main.temp}</Text>
+          <Text style={styles.textPrevi}>{`🕒 PREVISION DES 24H DERNIERE HEURE`}</Text>
 
-          {/* FlatList pour le défilement horizontal */}
           <FlatList
             data={dataDays}
             horizontal
